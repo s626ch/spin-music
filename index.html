@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        html, body, * {
+            margin:0;
+            padding:0;
+            width: 100%;
+            height: 100%;
+        }
+        html {
+            background-color: black;
+        }
+        .videoContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        .videoContainer .video {
+            width: auto;
+            height: auto;
+            z-index: 69;
+        }
+        .backgroundvideo {
+            z-index: -1;
+            position: absolute;
+            top:0;
+            width: 100%;
+            object-fit: cover;
+            filter: blur(25px) brightness(0.5);
+            user-select: none;
+        }
+        .bgBlocker {
+            position: absolute;
+            z-index: 5;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
+    </style>
+    <script>
+
+        // Original script to synchronize playback of two HTML5 video windows
+        // by Adam Pierce. 
+        // http://siliconsparrow.com/synchronize-two-video-replays-using-javascript/
+        // This script is public domain. You can copy, modify and share it as much 
+        // as you like.
+
+        // sync 2nd (right) video to playing position of 1st (left) video
+        window.onload = function(){
+            var v1 = document.getElementById('v1');
+    
+            v1.addEventListener("play", function() {
+	           document.getElementById('v2').play();
+            });
+    
+            v1.addEventListener("pause", function() {
+	           document.getElementById('v2').pause();
+            });
+    
+            v1.addEventListener("seeking", function() {
+	           document.getElementById('v2').currentTime = v1.currentTime;
+            });
+    
+            v1.addEventListener("seeked", function() {
+	           document.getElementById('v2').currentTime = v1.currentTime;
+            });
+        }
+    </script>
+    </head>
+    <body>
+        <div class="videoContainer">
+            <video src="Shi_ihn_poo_pihn.mp4" controls loop class="video" id="v1"></video>
+        </div>
+        <div class="bgBlocker"></div>
+        <video src="Shi_ihn_poo_pihn.mp4" loop class="backgroundvideo" muted id="v2"></video>
+    </body>
+    <script>
+        setInterval(changePageTitle, 100);
+        function changePageTitle() {
+            document.title = "SHITTIN";
+            setTimeout(function(){
+                document.title = "POOPIN";
+            }, 75);
+        }
+    </script>
+</html>
